@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUESS GENDER — BABY TRUONG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            background: #e8e8d0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            color: #2a2a2a;
+            line-height: 1.6;
+            padding: 20px 15px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Pixel Panel Base */
+        .pixel-panel {
+            background: #f5f5dc;
+            border: 4px solid #2a2a2a;
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.3),
+                inset 2px 2px 0 rgba(255,255,255,0.5),
+                4px 4px 0 rgba(0,0,0,0.15);
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .pixel-panel-inner {
+            border: 2px solid #6a6a5a;
+            padding: 15px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* HP Bar Decoration */
+        .hp-bar {
+            height: 12px;
+            background: #2a2a2a;
+            border: 2px solid #2a2a2a;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hp-bar-fill {
+            height: 100%;
+            background: linear-gradient(to bottom, #50d050, #30a030);
+            width: 85%;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4a4a4a;
+            margin-bottom: 25px;
+        }
+
+        .mission-box {
+            background: #2a2a2a;
+            color: #50d050;
+            border: 3px solid #50d050;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 
+                0 0 10px rgba(80, 208, 80, 0.3),
+                inset 0 0 20px rgba(80, 208, 80, 0.1);
+        }
+
+        .mission-box h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .mission-box p {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Legendary Cards */
+        .legendary-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        @media (min-width: 600px) {
+            .legendary-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .legendary-card {
+            background: #fff;
+            border: 4px solid #2a2a2a;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.2),
+                inset 2px 2px 0 rgba(255,255,255,0.7),
+                4px 4px 0 rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+
+        .legendary-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .legendary-card.mew {
+            border-color: #ff69b4;
+            background: linear-gradient(135deg, #fff 0%, #ffe0f0 100%);
+        }
+
+        .legendary-card.mewtwo {
+            border-color: #6495ed;
+            background: linear-gradient(135deg, #fff 0%, #e0ebff 100%);
+        }
+
+        .legendary-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .legendary-card p {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Pixel Button */
+        .pixel-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #2a2a2a;
+            border: 4px solid #2a2a2a;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.3),
+                inset 2px 2px 0 rgba(255,255,255,0.5),
+                4px 4px 0 rgba(0,0,0,0.3);
+            transition: all 0.1s;
+            margin: 20px 0;
+        }
+
+        .pixel-button:hover {
+            background: #ffed4e;
+            transform: translate(1px, 1px);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.3),
+                inset 2px 2px 0 rgba(255,255,255,0.5),
+                3px 3px 0 rgba(0,0,0,0.3);
+        }
+
+        .pixel-button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.3),
+                inset 2px 2px 0 rgba(255,255,255,0.5),
+                2px 2px 0 rgba(0,0,0,0.3);
+        }
+
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .hint-text {
+            font-size: 12px;
+            color: #6a6a5a;
+            margin-top: 10px;
+        }
+
+        /* Rules Section */
+        .rules-title {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.5);
+            border: 2px solid #6a6a5a;
+        }
+
+        .badge {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: #ffd700;
+            border: 3px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 
+                inset -1px -1px 0 rgba(0,0,0,0.3),
+                inset 1px 1px 0 rgba(255,255,255,0.5),
+                2px 2px 0 rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .badge::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #2a2a2a;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .rule-text {
+            flex: 1;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+        }
+
+        .deadline-bar {
+            background: #2a2a2a;
+            color: #ffd700;
+            padding: 12px 15px;
+            margin-top: 20px;
+            border: 3px solid #ffd700;
+            text-align: center;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Form Section */
+        .form-section {
+            scroll-margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-container {
+            background: #fff;
+            border: 4px solid #2a2a2a;
+            padding: 10px;
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.2),
+                inset 2px 2px 0 rgba(255,255,255,0.7),
+                4px 4px 0 rgba(0,0,0,0.15);
+        }
+
+        .form-container iframe {
+            width: 100%;
+            min-height: 600px;
+            border: none;
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 13px;
+            margin-top: 15px;
+            color: #4a4a4a;
+        }
+
+        /* Scoreboard */
+        .scoreboard {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .scoreboard {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .team-panel {
+            background: #fff;
+            border: 4px solid #2a2a2a;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.2),
+                inset 2px 2px 0 rgba(255,255,255,0.7),
+                3px 3px 0 rgba(0,0,0,0.15);
+        }
+
+        .team-panel.mew {
+            border-color: #ff69b4;
+            background: linear-gradient(135deg, #fff 0%, #ffe0f0 100%);
+        }
+
+        .team-panel.mewtwo {
+            border-color: #6495ed;
+            background: linear-gradient(135deg, #fff 0%, #e0ebff 100%);
+        }
+
+        .team-panel h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .team-panel .count {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px 15px;
+            border-top: 4px solid #2a2a2a;
+            background: rgba(42, 42, 42, 0.05);
+        }
+
+        .footer p {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .footer .disclaimer {
+            font-size: 11px;
+            color: #6a6a5a;
+            margin-top: 15px;
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.03) 2px,
+                rgba(0,0,0,0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="pixel-panel header">
+            <div class="hp-bar">
+                <div class="hp-bar-fill"></div>
+            </div>
+            
+            <h1 class="title">GUESS GENDER — BABY TRUONG</h1>
+            <p class="subtitle">MEW VS MEWTWO — CHOOSE THE SUMMONED LEGENDARY</p>
+            
+            <div class="mission-box">
+                <h3>◆ MISSION ◆</h3>
+                <p>LOCK IN YOUR GUESS.</p>
+                <p>GUESS WRONG? YOU OWE US A SHOT.</p>
+            </div>
+
+            <div class="legendary-cards">
+                <div class="legendary-card mew">
+                    <h3>MEW 💖</h3>
+                    <p>→ GIRL</p>
+                </div>
+                <div class="legendary-card mewtwo">
+                    <h3>MEWTWO 💙</h3>
+                    <p>→ BOY</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="#form-section" class="pixel-button">
+                    <span class="blink">▶</span> SUBMIT YOUR GUESS
+                </a>
+                <p class="hint-text">Use the same name you use in the group chat.</p>
+            </div>
+        </div>
+
+        <!-- Rules Section -->
+        <div class="pixel-panel">
+            <h2 class="rules-title">RULES (NO BACKING OUT)</h2>
+            
+            <div class="pixel-panel-inner">
+                <div class="rule-item">
+                    <div class="badge">1</div>
+                    <div class="rule-text">PICK ONE: MEW (GIRL) OR MEWTWO (BOY).</div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="badge">2</div>
+                    <div class="rule-text">SUBMIT ONCE USING THE FORM BELOW.</div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="badge">3</div>
+                    <div class="rule-text">AFTER THE REVEAL, IF YOU GUESSED WRONG YOU OWE US A SHOT.</div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="badge">4</div>
+                    <div class="rule-text">CAN'T DO SHOTS? YOU OWE US A FUN ALTERNATIVE (BEER / COFFEE / $5 VENMO) — WE DECIDE.</div>
+                </div>
+
+                <div class="deadline-bar">
+                    ⏰ DEADLINE TO SUBMIT: [INSERT DATE/TIME] ⏰
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div id="form-section" class="pixel-panel form-section">
+            <h2 class="section-title">LOCK IN YOUR GUESS</h2>
+            <p class="section-subtitle">THIS IS YOUR OFFICIAL SUBMISSION.</p>
+            
+            <div class="form-container">
+                <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK_HERE" frameborder="0">Loading…</iframe>
+            </div>
+            
+            <p class="form-note">ONE SUBMISSION PER PERSON PLEASE 🙂</p>
+        </div>
+
+        <!-- Scoreboard Section -->
+        <div class="pixel-panel">
+            <h2 class="section-title">TRAINER POOL</h2>
+            
+            <div class="scoreboard">
+                <div class="team-panel mew">
+                    <h4>TEAM MEW (GIRL)</h4>
+                    <div class="count">[#]</div>
+                    <p>TRAINERS</p>
+                </div>
+                
+                <div class="team-panel mewtwo">
+                    <h4>TEAM MEWTWO (BOY)</h4>
+                    <div class="count">[#]</div>
+                    <p>TRAINERS</p>
+                </div>
+            </div>
+            
+            <p class="form-note" style="margin-top: 20px;">WE'LL UPDATE THIS AFTER SUBMISSIONS CLOSE.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>MAY THE ODDS BE EVER IN YOUR POKÉDEX.</p>
+            <p class="disclaimer">POKÉMON-INSPIRED FAN THEME. NO OFFICIAL ASSETS USED.</p>
+        </div>
+    </div>
+</body>
+</html>
