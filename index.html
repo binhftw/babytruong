@@ -353,11 +353,29 @@
             margin: 10px 0;
         }
 
+        .team-panel .percentage {
+            font-size: 18px;
+            color: #6a6a5a;
+            margin-top: 5px;
+        }
+
         .form-note {
             text-align: center;
             font-size: 13px;
             margin-top: 15px;
             color: #4a4a4a;
+        }
+
+        .total-responses {
+            text-align: center;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4a4a4a;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.5);
+            border: 2px solid #6a6a5a;
         }
 
         /* Footer */
@@ -475,21 +493,27 @@
         <div class="pixel-panel">
             <h2 class="section-title">TRAINER POOL</h2>
             
+            <div class="total-responses">
+                📊 TOTAL RESPONSES: 16 TRAINERS
+            </div>
+
             <div class="scoreboard">
                 <div class="team-panel mew">
                     <h4>TEAM MEW (GIRL)</h4>
-                    <div class="count">[#]</div>
+                    <div class="count">12</div>
                     <p>TRAINERS</p>
+                    <p class="percentage">75%</p>
                 </div>
                 
                 <div class="team-panel mewtwo">
                     <h4>TEAM MEWTWO (BOY)</h4>
-                    <div class="count">[#]</div>
+                    <div class="count">4</div>
                     <p>TRAINERS</p>
+                    <p class="percentage">25%</p>
                 </div>
             </div>
             
-            <p class="form-note" style="margin-top: 20px;">WE'LL UPDATE THIS AFTER SUBMISSIONS CLOSE.</p>
+            <p class="form-note" style="margin-top: 20px;">UPDATED AS OF [INSERT DATE/TIME]</p>
         </div>
 
         <!-- Footer -->
